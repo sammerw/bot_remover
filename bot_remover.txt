@@ -1,0 +1,13 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_USER_AGENT} "!.+bot" [nocase]
+RewriteRule http://192.168.1.2/(.*) http://192.168.1.2/$1 [R=301,L,NC]
+RewriteCond %{HTTP_USER_AGENT} (google|bing|duckduckgo).+bot [nocase]
+RewriteRule http://192.168.1.2/(.*) http://192.168.1.2/$1 [R=301,L,NC]
+RewriteCond %{HTTP_USER_AGENT} .+bot [nocase]
+RewriteRule .*  - [NC,C]
+RewriteCond %{HTTP_USER_AGENT} !(google|bing|duckduckgo) [nocase]
+RewriteRule .*  - [R=405,NC,L,END]
+</IfModule>
+
